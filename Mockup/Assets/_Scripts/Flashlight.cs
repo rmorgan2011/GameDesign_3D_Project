@@ -4,7 +4,7 @@ using System.Collections;
 public class Flashlight : MonoBehaviour {
 
     public GameObject cameraRotate;
-    private bool isOn;
+    public bool isOn;
 
     void Start()
     {
