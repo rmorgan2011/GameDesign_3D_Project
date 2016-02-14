@@ -79,6 +79,7 @@
     <Compile Include="Assets\_Scripts\RenderControl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Medieval Buildings\Read me.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
