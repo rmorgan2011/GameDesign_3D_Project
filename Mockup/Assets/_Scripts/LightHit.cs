@@ -7,12 +7,13 @@ public class LightHit : MonoBehaviour {
     public GameObject[] enemies;
     public GameObject flashlight;
     private bool isVisible = false;
+    public Transform playerLocation;
 
     void Start()
     {
         gameObject.GetComponent<AudioSource>().enabled = true;
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         foreach (GameObject var in enemies)
         {
@@ -29,6 +30,7 @@ public class LightHit : MonoBehaviour {
     IEnumerator FlashEnemy(GameObject other)
     {//
         gameObject.GetComponent<AudioSource>().Play();
+        other.transform.LookAt(playerLocation);
         other.GetComponent<RenderControl>().isVisible = true;
         other.GetComponent<AICharacterControl>().pursuing = false;
         //flashlight.GetComponent<Flashlight>().isOn = false;
