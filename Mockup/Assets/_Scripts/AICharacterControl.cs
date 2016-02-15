@@ -12,6 +12,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
         public bool pursuing = true;
+        public GameObject teleporterEffect;
+        public Transform teleporterEffectSpawn;
 
         private void Start()
         {
@@ -42,6 +44,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     character.Move(Vector3.zero, false, false);
             }
             else
+//Instantiate(teleporterEffect, teleporterEffectSpawn.position, teleporterEffectSpawn.transform.localRotation);
                 character.Move(Vector3.zero, false, false);
         }
 

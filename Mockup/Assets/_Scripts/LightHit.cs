@@ -33,7 +33,7 @@ public class LightHit : MonoBehaviour {
         other.GetComponent<AICharacterControl>().pursuing = false;
         //flashlight.GetComponent<Flashlight>().isOn = false;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2f);
         other.GetComponent<RenderControl>().isVisible = false;
         other.GetComponent<AICharacterControl>().pursuing = true;
         isVisible = false;
