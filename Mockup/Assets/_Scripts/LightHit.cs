@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class LightHit : MonoBehaviour {
 
@@ -29,10 +30,12 @@ public class LightHit : MonoBehaviour {
     {//
         gameObject.GetComponent<AudioSource>().Play();
         other.GetComponent<RenderControl>().isVisible = true;
-        flashlight.GetComponent<Flashlight>().isOn = false;
+        other.GetComponent<AICharacterControl>().pursuing = false;
+        //flashlight.GetComponent<Flashlight>().isOn = false;
 
         yield return new WaitForSeconds(3);
         other.GetComponent<RenderControl>().isVisible = false;
+        other.GetComponent<AICharacterControl>().pursuing = true;
         isVisible = false;
     }
 }

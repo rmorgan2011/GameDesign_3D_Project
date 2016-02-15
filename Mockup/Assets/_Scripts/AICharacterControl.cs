@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (NavMeshAgent))]
@@ -10,7 +11,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
-        private bool pursuing = false;
+        public bool pursuing = true;
 
         private void Start()
         {
@@ -25,10 +26,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if(agent.remainingDistance < 40f)
-            {
-                pursuing = true;
-            }
+            Debug.Log("remaining Distance:" + agent.remainingDistance);
+  //          if (agent.remainingDistance < 20 && agent.remainingDistance != 0)
+   //         {                
+   //             pursuing = true;
+   //         }
             if (pursuing)
             {
                 if (target != null)
@@ -39,6 +41,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 else
                     character.Move(Vector3.zero, false, false);
             }
+            else
+                character.Move(Vector3.zero, false, false);
         }
 
 
