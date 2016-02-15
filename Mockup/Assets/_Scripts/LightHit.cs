@@ -28,7 +28,7 @@ public class LightHit : MonoBehaviour {
     }
 
     IEnumerator FlashEnemy(GameObject other)
-    {//
+    {
         gameObject.GetComponent<AudioSource>().Play();
         other.transform.LookAt(playerLocation);
         other.GetComponent<RenderControl>().isVisible = true;
@@ -37,6 +37,7 @@ public class LightHit : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         other.GetComponent<RenderControl>().isVisible = false;
+        other.transform.position = other.GetComponent<AICharacterControl>().spawnPoint.position;
         other.GetComponent<AICharacterControl>().pursuing = true;
         isVisible = false;
     }
