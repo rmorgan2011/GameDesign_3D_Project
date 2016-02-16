@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
+using UnityStandardAssets.Characters.ThirdPerson;
+using UnityStandardAssets.Cameras;
 
 public class GameController : MonoBehaviour {
+
+    public GameObject[] enemies;
+    public GameObject player;
+
+    public AudioSource endAudio;
 
     public GameObject flashlight;
     public GameObject flashlightText;
@@ -18,6 +26,10 @@ public class GameController : MonoBehaviour {
 
     private float batteryPercent;
     private float sprintPercent;
+
+    private float enemyDistance;
+    public float flashlightThreshold;
+    public float deathThreashold;
     
 
     public bool isSprinting;
@@ -26,9 +38,13 @@ public class GameController : MonoBehaviour {
     private bool sprintWait = false;
     private bool flashlightWait = false;
 
+    private int turnSpeed = 5;
+
 	// Use this for initialization
     void Start()
     {
+        endAudio.enabled = true;
+
         currSprint = maxSprint;
         currBattery = maxBattery;
 
@@ -40,6 +56,39 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
+        //handles reactions for enemy distance
+        foreach (GameObject var in enemies)
+        {
+            enemyDistance = Vector3.Distance(var.transform.position, player.transform.position);
+            Debug.Log(enemyDistance);
+            if(enemyDistance < flashlightThreshold)
+            {
+                flashlight.GetComponent<Flashlight>().isOn = false;
+                isOn = false;
+                if (enemyDistance < deathThreashold)
+                {
+                    if (var.GetComponent<RenderControl>().isVisible == false)
+                    {
+                        player.GetComponent<FirstPersonController>().enabled = false;
+                        var.GetComponent<AICharacterControl>().pursuing = false;
+                        player.transform.LookAt(var.transform);
+                   //     player.GetComponent<LookatTarget>().SetTarget(var.transform);
+                    //    player.GetComponent<LookatTarget>().enabled = true;
+                   //     var targetRotation = Quaternion.LookRotation(var.transform.position - player.transform.position);
+                   //     player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                        var.GetComponent<RenderControl>().isVisible = true;
+                        endAudio.Play();
+                        Time.timeScale = 0;
+                    }
+                }
+                
+            }
+        }
+        
+
+        //handles battery meter
         while (isOn && currBattery > 0f && flashlightWait == false)
         {
             Debug.Log(currBattery);
@@ -61,16 +110,16 @@ public class GameController : MonoBehaviour {
         
        
     }
-
+    //reduces flashlight value
     IEnumerator reduceFlashlight()
     {
         flashlightWait = true;
        
         currBattery -= batteryReduce;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         flashlightWait = false;
     }
-
+    //reduces sprint value
     IEnumerator reduceSprint()
     {
         sprintWait = true;

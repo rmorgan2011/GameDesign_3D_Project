@@ -29,7 +29,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            Debug.Log("remaining Distance:" + agent.remainingDistance);
+       //     Debug.Log("remaining Distance:" + agent.remainingDistance);
   //          if (agent.remainingDistance < 20 && agent.remainingDistance != 0)
    //         {                
    //             pursuing = true;

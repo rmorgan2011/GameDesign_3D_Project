@@ -22,6 +22,7 @@ namespace UnityStandardAssets.Cameras
         [SerializeField] private Vector2 m_RotationRange;
         [SerializeField] private float m_FollowSpeed = 1;
 
+
         private Vector3 m_FollowAngles;
         private Quaternion m_OriginalRotation;
 

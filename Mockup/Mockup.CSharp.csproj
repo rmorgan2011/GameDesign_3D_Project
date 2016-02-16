@@ -77,7 +77,9 @@
     <Compile Include="Assets\_Scripts\DestroyByTime.cs" />
     <Compile Include="Assets\_Scripts\Flashlight.cs" />
     <Compile Include="Assets\_Scripts\GameController.cs" />
+    <Compile Include="Assets\_Scripts\HandHeldCam.cs" />
     <Compile Include="Assets\_Scripts\LightHit.cs" />
+    <Compile Include="Assets\_Scripts\LookatTarget.cs" />
     <Compile Include="Assets\_Scripts\RenderControl.cs" />
   </ItemGroup>
   <ItemGroup>
