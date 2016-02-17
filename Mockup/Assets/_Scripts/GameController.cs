@@ -105,7 +105,7 @@ public class GameController : MonoBehaviour {
 			StartCoroutine (reduceSprint());
 		}
 
-		if(Input.GetKeyUp(KeyCode.LeftShift)){
+		if(Input.GetKeyUp(KeyCode.LeftShift) || currSprint < 1){
 			isSprinting = false;
 		}
 

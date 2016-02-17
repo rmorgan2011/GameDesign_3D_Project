@@ -48,6 +48,7 @@
      <Compile Include="Assets\_Models\LowPolyBushVinesPackage\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\_Scripts\AICharacterControl.cs" />
      <Compile Include="Assets\_Scripts\DestroyByTime.cs" />
+     <Compile Include="Assets\_Scripts\FirstPersonController.cs" />
      <Compile Include="Assets\_Scripts\Flashlight.cs" />
      <Compile Include="Assets\_Scripts\GameController.cs" />
      <Compile Include="Assets\_Scripts\HandHeldCam.cs" />
