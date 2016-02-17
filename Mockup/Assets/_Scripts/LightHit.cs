@@ -30,7 +30,7 @@ public class LightHit : MonoBehaviour {
     IEnumerator FlashEnemy(GameObject other)
     {
         gameObject.GetComponent<AudioSource>().Play();
-        other.transform.LookAt(playerLocation);
+        other.transform.LookAt(playerLocation.position - new Vector3 (0,.75f,0));
         other.GetComponent<RenderControl>().isVisible = true;
         other.GetComponent<AICharacterControl>().pursuing = false;
         //flashlight.GetComponent<Flashlight>().isOn = false;

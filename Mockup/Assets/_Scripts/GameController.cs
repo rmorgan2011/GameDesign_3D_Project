@@ -40,8 +40,7 @@ public class GameController : MonoBehaviour {
 
     private bool sprintWait = false;
     private bool flashlightWait = false;
-
-    private int turnSpeed = 5;
+    
 
 	// Use this for initialization
     void Start()
@@ -64,26 +63,32 @@ public class GameController : MonoBehaviour {
         foreach (GameObject var in enemies)
         {
             enemyDistance = Vector3.Distance(var.transform.position, player.transform.position);
-            Debug.Log(enemyDistance);
+          //  Debug.Log(enemyDistance);
             if(enemyDistance < flashlightThreshold)
             {
+                //prevents user from keeping flashlight on if within a certain distance
+                //adds a lot of tension to the game
                 flashlight.GetComponent<Flashlight>().isOn = false;
                 isOn = false;
-                if (enemyDistance < deathThreashold)
+                if (enemyDistance < deathThreashold && player.GetComponent<CharacterController>().isGrounded)
                 {
+                    //enable enemy render, stop pursuit, and play scare sound
                     if (var.GetComponent<RenderControl>().isVisible == false)
                     {
+                        //disables input
                         player.GetComponent<FirstPersonController>().enabled = false;
+                        var.transform.LookAt(player.transform.position - new Vector3(0, .75f, 0));
                         var.GetComponent<AICharacterControl>().pursuing = false;
-                        player.transform.LookAt(var.transform);
-                   //     player.GetComponent<LookatTarget>().SetTarget(var.transform);
-                    //    player.GetComponent<LookatTarget>().enabled = true;
-                   //     var targetRotation = Quaternion.LookRotation(var.transform.position - player.transform.position);
-                   //     player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
                         var.GetComponent<RenderControl>().isVisible = true;
                         endAudio.Play();
-                        Time.timeScale = 0;
                     }
+                   
+                    //handles looking at enemy
+                    Vector3 relativePos = (var.transform.position + new Vector3(0,.75f,0)) - player.transform.position;
+                    Quaternion rotation = (Quaternion.LookRotation(relativePos));
+                    player.transform.rotation = Quaternion.Slerp(player.transform.rotation, rotation, 5 * Time.deltaTime);
+                    
+                   
                 }
                 
             }
@@ -95,7 +100,7 @@ public class GameController : MonoBehaviour {
         //handles battery meter
         while (isOn && currBattery > 0f && flashlightWait == false)
         {
-            Debug.Log(currBattery);
+           // Debug.Log(currBattery);
             StartCoroutine(reduceFlashlight());
         }
 
