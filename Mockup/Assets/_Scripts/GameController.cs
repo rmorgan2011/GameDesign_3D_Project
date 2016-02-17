@@ -14,12 +14,15 @@ public class GameController : MonoBehaviour {
     public GameObject flashlight;
     public GameObject flashlightText;
     public GameObject sprintText;
+	public GameObject flashlightBattery;
+	public GameObject sprintMeter;
 
     public float maxSprint;
     public float maxBattery;
 
     public float sprintReduce;
     public float batteryReduce;
+	public float sprintRegen;
 
     private float currSprint;
     private float currBattery;
@@ -51,7 +54,6 @@ public class GameController : MonoBehaviour {
         batteryPercent = (currBattery / maxBattery) * 100;
 
         isOn = flashlight.GetComponent<Flashlight>().isOn;
-        flashlightText.GetComponent<GUIText>().text = "Battery: " + batteryPercent + "%";
     }
 	
 	// Update is called once per frame
@@ -86,6 +88,8 @@ public class GameController : MonoBehaviour {
                 
             }
         }
+
+
         
 
         //handles battery meter
@@ -94,6 +98,26 @@ public class GameController : MonoBehaviour {
             Debug.Log(currBattery);
             StartCoroutine(reduceFlashlight());
         }
+
+		//fire3 = left shift, check if he's sprinting
+		if (Input.GetButton ("Fire3") && currSprint > 0) {
+			isSprinting = true;
+			StartCoroutine (reduceSprint());
+		}
+
+		if(Input.GetKeyUp(KeyCode.LeftShift)){
+			isSprinting = false;
+		}
+
+		if (!isSprinting) {
+			currSprint += sprintRegen;
+			if (currSprint > 100) {
+				currSprint = 100;
+			}
+			float sprintPercent = currSprint / maxSprint;
+			sprintMeter.transform.localScale = new Vector3(sprintPercent, transform.localScale.y, sprintMeter.transform.localScale.z);
+		}
+
 
         if (currBattery == 0f)
         {
@@ -105,8 +129,9 @@ public class GameController : MonoBehaviour {
         }
         isOn = flashlight.GetComponent<Flashlight>().isOn;
        
-        batteryPercent = (currBattery / maxBattery) * 100;
-        flashlightText.GetComponent<GUIText>().text = "Battery: " + batteryPercent + "%";
+        batteryPercent = (currBattery / maxBattery);
+        //flashlightText.GetComponent<GUIText>().text = "Battery: " + batteryPercent + "%";
+		flashlightBattery.transform.localScale = new Vector3(batteryPercent, transform.localScale.y, flashlightBattery.transform.localScale.z);
         
        
     }
@@ -124,9 +149,18 @@ public class GameController : MonoBehaviour {
     {
         sprintWait = true;
         currSprint -= sprintReduce;
+		if (currSprint < 0) {
+			currSprint = 0;
+			isSprinting = false;
+		}
+		float sprintPercent = currSprint / maxSprint;
+		sprintMeter.transform.localScale = new Vector3(sprintPercent, transform.localScale.y, sprintMeter.transform.localScale.z);
         yield return new WaitForSeconds(2f);
         sprintWait = false;
     }
 
+	public bool amSprinting(){
+		return isSprinting;
+		}
 
 }
