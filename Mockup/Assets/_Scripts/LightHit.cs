@@ -37,7 +37,8 @@ public class LightHit : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
         other.GetComponent<RenderControl>().isVisible = false;
-        other.transform.position = other.GetComponent<AICharacterControl>().spawnPoint.position;
+        int randomIndex = Random.Range(0, other.GetComponent<AICharacterControl>().spawnPoints.Length-1);
+        other.transform.position = other.GetComponent<AICharacterControl>().spawnPoints[randomIndex].position;
         other.GetComponent<AICharacterControl>().pursuing = true;
         isVisible = false;
     }

@@ -14,7 +14,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool pursuing = true;
         public GameObject teleporterEffect;
         public Transform teleporterEffectSpawn;
-        public Transform spawnPoint;
+        public Transform[] spawnPoints;
 
         private void Start()
         {
