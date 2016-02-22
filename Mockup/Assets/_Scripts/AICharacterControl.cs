@@ -16,11 +16,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public Transform teleporterEffectSpawn;
         public Transform[] spawnPoints;
 
+		public float normalDetectDistance;
+		//flashlight = easier to find = enemies can spot you from further away
+		public float flashlightDetectDistance;
+		//sprinting = louder = enemies can detect from further away
+		public float sprintDetectDistance;
+
+		//to keep track of whether or not the flashlight is on
+		private GameController gameController;
+		private Transform playerTransform;
+
         private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
+			playerTransform = GameObject.FindGameObjectWithTag ("Player").transform;
+			gameController = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController>();
+			if (gameController == null) {
+				//shouldn't happen
+			}
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
@@ -34,6 +49,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
    //         {                
    //             pursuing = true;
    //         }
+			float distance = Vector3.Distance(transform.position, playerTransform.position);
+			if(distance<normalDetectDistance || (distance<flashlightDetectDistance && gameController.isOn) || (distance<sprintDetectDistance && gameController.isSprinting)){
             if (pursuing)
             {
                 if (target != null)
@@ -48,6 +65,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //Instantiate(teleporterEffect, teleporterEffectSpawn.position, teleporterEffectSpawn.transform.localRotation);
                 character.Move(Vector3.zero, false, false);
         }
+		}
 
 
         public void SetTarget(Transform target)

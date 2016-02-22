@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour {
 		}
 
 
-        if (currBattery == 0f)
+        if (currBattery <= 0f)
         {
             flashlight.GetComponent<Flashlight>().canBeOn = false;
         }
