@@ -17,13 +17,17 @@ public class LightHit : MonoBehaviour {
     {
         foreach (GameObject var in enemies)
         {
-            if (other.tag == "Enemy" && flashlight.GetComponent<Flashlight>().isOn)
-            {
-                if (var.GetComponent<Collider>() == other && var.GetComponent<RenderControl>().isVisible == false) {
-                    StartCoroutine(FlashEnemy(var));
+         //   if (!Physics.Linecast(transform.position, other.transform.position))
+           // {
+                if (other.tag == "Enemy" && flashlight.GetComponent<Flashlight>().isOn)
+                {
+                    if (var.GetComponent<Collider>() == other && var.GetComponent<RenderControl>().isVisible == false)
+                    {
+                        StartCoroutine(FlashEnemy(var));
+                    }
+                    //     var.GetComponent<ai>
                 }
-           //     var.GetComponent<ai>
-            }
+           // }
         }
     }
 

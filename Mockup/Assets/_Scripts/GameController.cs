@@ -87,8 +87,13 @@ public class GameController : MonoBehaviour {
                     Vector3 relativePos = (var.transform.position + new Vector3(0,.75f,0)) - player.transform.position;
                     Quaternion rotation = (Quaternion.LookRotation(relativePos));
                     player.transform.rotation = Quaternion.Slerp(player.transform.rotation, rotation, 5 * Time.deltaTime);
-                    
-                   
+                    if (Input.GetKeyUp("r"))
+                    {
+                        Application.LoadLevel(Application.loadedLevel);
+                    }
+
+
+
                 }
                 
             }
