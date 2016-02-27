@@ -263,5 +263,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Battery"))
+            {
+                other.gameObject.SetActive(false);
+            }
+            GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+            if (gameControllerObject != null)
+            {
+                GameController gameController = gameControllerObject.GetComponent<GameController>();
+                gameController.increaseBattery(50);
+
+            }
+
+
+        }
     }
 }

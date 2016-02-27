@@ -173,4 +173,12 @@ public class GameController : MonoBehaviour {
 		return isSprinting;
 		}
 
+    public void increaseBattery(float increaseBattery)
+    {
+        currBattery += increaseBattery;
+        if (currBattery < maxBattery)
+            currBattery = maxBattery;
+
+    }
+
 }
