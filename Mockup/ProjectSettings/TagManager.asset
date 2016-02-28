@@ -8,6 +8,8 @@ TagManager:
   - Fire
   - Battery
   - Killable
+  - Story
+  - Note
   layers:
   - Default
   - TransparentFX
