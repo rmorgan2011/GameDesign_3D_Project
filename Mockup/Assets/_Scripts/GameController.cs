@@ -176,7 +176,7 @@ public class GameController : MonoBehaviour {
     public void increaseBattery(float increaseBattery)
     {
         currBattery += increaseBattery;
-        if (currBattery < maxBattery)
+        if (currBattery > maxBattery)
             currBattery = maxBattery;
 
     }

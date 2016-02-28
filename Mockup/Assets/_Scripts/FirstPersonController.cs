@@ -269,14 +269,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.gameObject.CompareTag("Battery"))
             {
                 other.gameObject.SetActive(false);
-            }
-            GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-            if (gameControllerObject != null)
-            {
-                GameController gameController = gameControllerObject.GetComponent<GameController>();
-                gameController.increaseBattery(50);
+				GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+				if (gameControllerObject != null)
+				{
+					GameController gameController = gameControllerObject.GetComponent<GameController>();
+					gameController.increaseBattery(50);
 
+				}
             }
+            
 
 
         }
