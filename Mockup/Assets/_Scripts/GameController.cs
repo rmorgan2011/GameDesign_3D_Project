@@ -6,9 +6,11 @@ using UnityStandardAssets.Cameras;
 
 public class GameController : MonoBehaviour {
 
-    private int numNotes = 10;
-    private int currNotes;
+    private int numNotes = 2;
+    private int currNotes = 0;
     public GameObject noteText;
+
+    public GameObject gameOverText;
 
     public GameObject[] enemies;
     public GameObject player;
@@ -47,7 +49,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        currNotes = numNotes;
+        gameOverText.GetComponent<UnityEngine.UI.Text>().text = "";
         endAudio.enabled = true;
 
         currSprint = maxSprint;
@@ -58,13 +60,36 @@ public class GameController : MonoBehaviour {
         isOn = flashlight.GetComponent<Flashlight>().isOn;
     }
 
-    public void DecrementNotes()
+    public void IncrementNotes()
     {
-        currNotes--;
+        currNotes++;
+    }
+
+    public void WinGame()
+    {
+        gameOverText.GetComponent<UnityEngine.UI.Text>().text = "You Have Won\nPress 'R' to Restart.";
+        Time.timeScale = 0;
+        player.GetComponent<FirstPersonController>().enabled = false;
+        if (Input.GetKeyUp("r"))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+            Time.timeScale = 1;
+        }
+    }
+
+    IEnumerator GameOverText()
+    {
+        yield return new WaitForSeconds(2f);
+        gameOverText.GetComponent<UnityEngine.UI.Text>().text = "You Have Lost\nPress 'R' to Restart.";
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(currNotes == numNotes)
+        {
+            WinGame();
+        }
 
         noteText.GetComponent<UnityEngine.UI.Text>().text = "Notes: " + currNotes + "/" + numNotes;
 
@@ -91,6 +116,7 @@ public class GameController : MonoBehaviour {
                         var.GetComponent<AICharacterControl>().pursuing = false;
                         var.GetComponent<AICharacterControl>().stuck = true;
                         var.GetComponent<RenderControl>().isVisible = true;
+                        StartCoroutine(GameOverText());
                         endAudio.Play();
                     }
                    

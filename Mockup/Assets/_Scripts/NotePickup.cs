@@ -31,15 +31,17 @@ public class NotePickup : MonoBehaviour {
 				noteCanvas.SetActive (false);
 				player.GetComponent<FirstPersonController>().enabled = true;
 				Destroy (transform.gameObject);
-                gameController.DecrementNotes();
+                gameController.IncrementNotes();
+                Time.timeScale = 1;
 
-			}
+            }
 		}
 	
 	}
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
+            Time.timeScale = 0;
 			noteCanvas.SetActive (true);
 			isVisible = true;
 			title.GetComponent<Text> ().text = noteTitle;
