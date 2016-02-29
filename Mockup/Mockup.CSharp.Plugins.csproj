@@ -186,6 +186,7 @@
     <Compile Include="Assets\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Game Jam Menu Template\GameJamTemplateReadMe.txt" />
     <None Include="Assets\Medieval Buildings\Read me.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

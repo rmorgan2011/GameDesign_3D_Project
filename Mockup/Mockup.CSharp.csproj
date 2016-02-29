@@ -70,6 +70,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\DontDestroy.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\Pause.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\PlayMusic.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\QuitApplication.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\SetAudioLevels.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\ShowPanels.cs" />
+    <Compile Include="Assets\Game Jam Menu Template\Scripts\StartOptions.cs" />
     <Compile Include="Assets\_Models\LowPolyBushVinesPackage\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
     <Compile Include="Assets\_Scripts\AICharacterControl.cs" />
     <Compile Include="Assets\_Scripts\DestroyByTime.cs" />
@@ -83,6 +91,7 @@
     <Compile Include="Assets\_Scripts\RenderControl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Game Jam Menu Template\GameJamTemplateReadMe.txt" />
     <None Include="Assets\Medieval Buildings\Read me.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
