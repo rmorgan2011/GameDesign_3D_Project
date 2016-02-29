@@ -6,6 +6,8 @@ using UnityStandardAssets.Cameras;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+    public bool nuxMode = false;
+    public GameObject nuxModeText;
 
     public bool paused = false;
     private bool dead = false;
@@ -90,6 +92,26 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyUp("n"))
+        {
+            nuxMode = !nuxMode;
+        }
+        if (nuxMode)
+        {
+            nuxModeText.GetComponent<UnityEngine.UI.Text>().text = "Nux Mode";
+            foreach (GameObject var in enemies)
+            {
+                var.SetActive(false);
+            }
+        }
+        else
+        {
+            nuxModeText.GetComponent<UnityEngine.UI.Text>().text = "";
+            foreach (GameObject var in enemies)
+            {
+                var.SetActive(true);
+            }
+        }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             paused = !paused;
