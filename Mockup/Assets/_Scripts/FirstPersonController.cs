@@ -44,6 +44,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private GameObject controls;
 		private GameController gameController;
 
+        public AudioClip audioClip;
+
         // Use this for initialization
         private void Start()
         {
@@ -268,7 +270,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.CompareTag("Battery"))
             {
+                
+                gameObject.GetComponent<AudioSource>().PlayOneShot(audioClip);
                 other.gameObject.SetActive(false);
+                
+                
 				GameObject gameControllerObject = GameObject.FindWithTag("GameController");
 				if (gameControllerObject != null)
 				{

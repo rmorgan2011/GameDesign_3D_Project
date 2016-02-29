@@ -6,7 +6,7 @@ using UnityStandardAssets.Cameras;
 
 public class GameController : MonoBehaviour {
 
-    private int numNotes = 2;
+    private int numNotes = 5;
     private int currNotes = 0;
     public GameObject noteText;
 

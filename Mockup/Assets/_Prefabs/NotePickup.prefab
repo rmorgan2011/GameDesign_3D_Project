@@ -91,6 +91,8 @@ MonoBehaviour:
   title: {fileID: 0}
   content: {fileID: 0}
   player: {fileID: 0}
+  gameController: {fileID: 0}
+  noteSound: {fileID: 8300000, guid: d16da878fee82684eb81c5ba34984cb2, type: 3}
   noteTitle: WELCOME TO DIE
   noteContent: (PRESS E TO CLOSE) WHATEVER YOU DO...DON'T LET THEM CATCH YOU. USE
     YOUR FLASHLIGHT TO STUN THEM. BLAH. BLAH. I DUNNO.
@@ -100,7 +102,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: noteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d16da878fee82684eb81c5ba34984cb2, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119738}

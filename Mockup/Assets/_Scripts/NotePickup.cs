@@ -9,6 +9,7 @@ public class NotePickup : MonoBehaviour {
 	public GameObject content;
 	public GameObject player;
     public GameController gameController;
+    public AudioClip noteSound;
 
 
 	//these two tell which note texts to display
@@ -47,6 +48,7 @@ public class NotePickup : MonoBehaviour {
 			title.GetComponent<Text> ().text = noteTitle;
 			content.GetComponent<Text> ().text = noteContent;
 			player.GetComponent<FirstPersonController>().enabled = false;
+            player.GetComponent<AudioSource>().PlayOneShot(noteSound);
 
 		}
 	}
