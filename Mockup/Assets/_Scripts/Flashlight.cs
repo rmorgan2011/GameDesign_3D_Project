@@ -6,9 +6,11 @@ public class Flashlight : MonoBehaviour {
     public GameObject cameraRotate;
     public bool isOn;
     public bool canBeOn;
+    public GameController gameController;
 
     void Start()
     {
+        
         gameObject.GetComponent<AudioSource>().enabled = true;
         canBeOn = true;
     }
@@ -20,10 +22,13 @@ public class Flashlight : MonoBehaviour {
 
         if (canBeOn == true)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (gameController.paused == false)
             {
-                isOn = !isOn;
-                gameObject.GetComponent<AudioSource>().Play();
+                if (Input.GetMouseButtonUp(0))
+                {
+                    isOn = !isOn;
+                    gameObject.GetComponent<AudioSource>().Play();
+                }
             }
         }
         else

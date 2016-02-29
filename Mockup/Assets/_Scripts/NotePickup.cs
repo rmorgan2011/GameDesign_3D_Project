@@ -29,11 +29,12 @@ public class NotePickup : MonoBehaviour {
 		//allow player to press a button to dismiss the popup message
 		if (isVisible) {
 			if(Input.GetKeyDown(KeyCode.E)){
-				noteCanvas.SetActive (false);
-				player.GetComponent<FirstPersonController>().enabled = true;
+                gameController.paused = false;
+                noteCanvas.SetActive (false);
+				//player.GetComponent<FirstPersonController>().enabled = true;
 				Destroy (transform.gameObject);
                 gameController.IncrementNotes();
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
 
             }
 		}
@@ -42,12 +43,13 @@ public class NotePickup : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
-            Time.timeScale = 0;
+            gameController.paused = true;
+            //Time.timeScale = 0;
 			noteCanvas.SetActive (true);
 			isVisible = true;
 			title.GetComponent<Text> ().text = noteTitle;
 			content.GetComponent<Text> ().text = noteContent;
-			player.GetComponent<FirstPersonController>().enabled = false;
+			//player.GetComponent<FirstPersonController>().enabled = false;
             player.GetComponent<AudioSource>().PlayOneShot(noteSound);
 
 		}

@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Start()
         {
+            
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
@@ -41,6 +42,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             agent.updateRotation = false;
             agent.updatePosition = true;
+            int randomIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
+            gameObject.transform.position = spawnPoints[randomIndex].position;
         }
 
 

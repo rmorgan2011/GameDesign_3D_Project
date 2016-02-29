@@ -3,8 +3,12 @@ using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.Characters.ThirdPerson;
 using UnityStandardAssets.Cameras;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
+
+    public bool paused = false;
+    private bool dead = false;
 
     private int numNotes = 5;
     private int currNotes = 0;
@@ -72,7 +76,7 @@ public class GameController : MonoBehaviour {
         player.GetComponent<FirstPersonController>().enabled = false;
         if (Input.GetKeyUp("r"))
         {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(1);
             Time.timeScale = 1;
         }
     }
@@ -85,6 +89,26 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            paused = !paused;
+
+        }
+
+        if (paused)
+        {
+            Time.timeScale = 0;
+            player.GetComponent<FirstPersonController>().enabled = false;
+        }
+        else
+        {
+            if (!dead)
+            {
+                Time.timeScale = 1;
+                player.GetComponent<FirstPersonController>().enabled = true;
+            }
+        }
 
         if(currNotes == numNotes)
         {
@@ -111,6 +135,7 @@ public class GameController : MonoBehaviour {
                     if (var.GetComponent<RenderControl>().isVisible == false)
                     {
                         //disables input
+                        dead = true;
                         player.GetComponent<FirstPersonController>().enabled = false;
                         var.transform.LookAt(player.transform.position - new Vector3(0, .75f, 0));
                         var.GetComponent<AICharacterControl>().pursuing = false;
@@ -126,7 +151,7 @@ public class GameController : MonoBehaviour {
                     player.transform.rotation = Quaternion.Slerp(player.transform.rotation, rotation, 5 * Time.deltaTime);
                     if (Input.GetKeyUp("r"))
                     {
-                        Application.LoadLevel(Application.loadedLevel);
+                        SceneManager.LoadScene(1);
                     }
 
 
