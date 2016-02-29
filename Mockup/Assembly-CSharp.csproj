@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NotePickup.cs" />
      <Compile Include="Assets\_Models\LowPolyBushVinesPackage\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\_Scripts\AICharacterControl.cs" />
      <Compile Include="Assets\_Scripts\DestroyByTime.cs" />
@@ -55,6 +54,7 @@
      <Compile Include="Assets\_Scripts\HandHeldCam.cs" />
      <Compile Include="Assets\_Scripts\LightHit.cs" />
      <Compile Include="Assets\_Scripts\LookatTarget.cs" />
+     <Compile Include="Assets\_Scripts\NotePickup.cs" />
      <Compile Include="Assets\_Scripts\RenderControl.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
