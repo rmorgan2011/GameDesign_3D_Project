@@ -8,6 +8,7 @@ public class NotePickup : MonoBehaviour {
 	public GameObject title;
 	public GameObject content;
 	public GameObject player;
+    public GameController gameController;
 
 
 	//these two tell which note texts to display
@@ -30,6 +31,8 @@ public class NotePickup : MonoBehaviour {
 				noteCanvas.SetActive (false);
 				player.GetComponent<FirstPersonController>().enabled = true;
 				Destroy (transform.gameObject);
+                gameController.DecrementNotes();
+
 			}
 		}
 	

@@ -38,13 +38,15 @@ public class LightHit : MonoBehaviour {
         other.transform.LookAt(playerLocation.position - new Vector3 (0,.75f,0));
         other.GetComponent<RenderControl>().isVisible = true;
         other.GetComponent<AICharacterControl>().pursuing = false;
+        other.GetComponent<AICharacterControl>().stuck = true;
+
         //flashlight.GetComponent<Flashlight>().isOn = false;
 
         yield return new WaitForSeconds(2f);
         other.GetComponent<RenderControl>().isVisible = false;
         int randomIndex = Random.Range(0, other.GetComponent<AICharacterControl>().spawnPoints.Length);
         other.transform.position = other.GetComponent<AICharacterControl>().spawnPoints[randomIndex].position;
-        other.GetComponent<AICharacterControl>().pursuing = true;
+        other.GetComponent<AICharacterControl>().stuck = false;
         isVisible = false;
     }
 

@@ -6,14 +6,16 @@ using UnityStandardAssets.Cameras;
 
 public class GameController : MonoBehaviour {
 
+    private int numNotes = 10;
+    private int currNotes;
+    public GameObject noteText;
+
     public GameObject[] enemies;
     public GameObject player;
 
     public AudioSource endAudio;
 
     public GameObject flashlight;
-    public GameObject flashlightText;
-    public GameObject sprintText;
 	public GameObject flashlightBattery;
 	public GameObject sprintMeter;
 
@@ -45,6 +47,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        currNotes = numNotes;
         endAudio.enabled = true;
 
         currSprint = maxSprint;
@@ -54,9 +57,16 @@ public class GameController : MonoBehaviour {
 
         isOn = flashlight.GetComponent<Flashlight>().isOn;
     }
+
+    public void DecrementNotes()
+    {
+        currNotes--;
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        noteText.GetComponent<UnityEngine.UI.Text>().text = "Notes: " + currNotes + "/" + numNotes;
 
 
         //handles reactions for enemy distance
@@ -79,6 +89,7 @@ public class GameController : MonoBehaviour {
                         player.GetComponent<FirstPersonController>().enabled = false;
                         var.transform.LookAt(player.transform.position - new Vector3(0, .75f, 0));
                         var.GetComponent<AICharacterControl>().pursuing = false;
+                        var.GetComponent<AICharacterControl>().stuck = true;
                         var.GetComponent<RenderControl>().isVisible = true;
                         endAudio.Play();
                     }
